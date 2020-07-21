@@ -1,0 +1,313 @@
+2020-07-21 15:03:05.650 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 15:03:05.666 +05:30 [INF] Hosting environment: Development
+2020-07-21 15:03:05.669 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 15:03:05.669 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 15:03:18.286 +05:30 [INF] Authentication Process Started!
+2020-07-21 15:03:18.300 +05:30 [ERR] Authentication Failed!
+2020-07-21 15:03:18.317 +05:30 [INF] Request finished in 12657.4501ms 401 
+2020-07-21 15:03:37.105 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json 138
+2020-07-21 15:03:45.031 +05:30 [INF] Authentication Process Started!
+2020-07-21 15:03:49.827 +05:30 [WRN] No type was specified for the decimal column 'TotalSalesAmount' on entity type 'CustomerDetails'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2020-07-21 15:03:49.864 +05:30 [INF] Entity Framework Core 3.1.6 initialized 'CustomerServiceContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2020-07-21 15:03:50.390 +05:30 [INF] Executed DbCommand (58ms) [Parameters=[@__username_0='?' (Size = 4000), @__password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[ID], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Username] = @__username_0) AND ([u].[Password] = @__password_1)
+2020-07-21 15:03:51.810 +05:30 [INF] Authentication Successful!
+2020-07-21 15:03:55.571 +05:30 [INF] Executing endpoint 'CustomerService.Controllers.CustomerServiceController.AddEditCustomerDetails (CustomerService)'
+2020-07-21 15:03:55.596 +05:30 [INF] Route matched with {action = "AddEditCustomerDetails", controller = "CustomerService"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddEditCustomerDetails(CustomerService.Models.CustomerDetails) on controller CustomerService.Controllers.CustomerServiceController (CustomerService).
+2020-07-21 15:03:57.816 +05:30 [INF] Request for AddEditCustomerDetails Resource
+2020-07-21 15:04:04.825 +05:30 [ERR] UniqueId : 113 CustomerName : Abhijeet Deshmukh  TimeStamp : 2020-07-21 12:00:00 AM AgentId :100.00 Timestamp should be less than Current date!
+2020-07-21 15:04:06.709 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2020-07-21 15:04:06.722 +05:30 [INF] Executed action CustomerService.Controllers.CustomerServiceController.AddEditCustomerDetails (CustomerService) in 11121.3871ms
+2020-07-21 15:04:06.723 +05:30 [INF] Executed endpoint 'CustomerService.Controllers.CustomerServiceController.AddEditCustomerDetails (CustomerService)'
+2020-07-21 15:04:10.105 +05:30 [INF] Request finished in 33003.0838ms 400 text/plain; charset=utf-8
+2020-07-21 15:05:07.479 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json 135
+2020-07-21 15:05:17.580 +05:30 [INF] Authentication Process Started!
+2020-07-21 15:05:17.611 +05:30 [INF] Entity Framework Core 3.1.6 initialized 'CustomerServiceContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2020-07-21 15:05:17.618 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?' (Size = 4000), @__password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[ID], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Username] = @__username_0) AND ([u].[Password] = @__password_1)
+2020-07-21 15:05:17.620 +05:30 [INF] Authentication Successful!
+2020-07-21 15:05:17.621 +05:30 [INF] Executing endpoint 'CustomerService.Controllers.CustomerServiceController.AddEditCustomerDetails (CustomerService)'
+2020-07-21 15:05:17.621 +05:30 [INF] Route matched with {action = "AddEditCustomerDetails", controller = "CustomerService"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddEditCustomerDetails(CustomerService.Models.CustomerDetails) on controller CustomerService.Controllers.CustomerServiceController (CustomerService).
+2020-07-21 15:05:19.094 +05:30 [INF] Request for AddEditCustomerDetails Resource
+2020-07-21 15:05:23.511 +05:30 [INF] UniqueId : 113 CustomerName : Abhijeet Deshmukh  TimeStamp : 2020-07-20 12:00:00 AM AgentId :100 Object Received for Insertion Process
+2020-07-21 15:05:27.315 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[UniqueId], [c].[CustomerName], [c].[CustomerType], [c].[Filename], [c].[TimeStamp], [c].[TotalSalesAmount]
+FROM [CustomerDetails] AS [c]
+WHERE [c].[UniqueId] = @__Trim_0
+2020-07-21 15:05:36.615 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [CustomerDetails] ([UniqueId], [CustomerName], [CustomerType], [Filename], [TimeStamp], [TotalSalesAmount])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2020-07-21 15:05:42.131 +05:30 [ERR] UniqueId : 113 CustomerName : Abhijeet Deshmukh  TimeStamp : 2020-07-20 12:00:00 AM AgentId :100 Record Inserted Suceessfully to CustomerDetails table
+2020-07-21 15:05:51.375 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2020-07-21 15:05:51.376 +05:30 [INF] Executed action CustomerService.Controllers.CustomerServiceController.AddEditCustomerDetails (CustomerService) in 33754.957ms
+2020-07-21 15:05:51.377 +05:30 [INF] Executed endpoint 'CustomerService.Controllers.CustomerServiceController.AddEditCustomerDetails (CustomerService)'
+2020-07-21 15:05:54.924 +05:30 [INF] Request finished in 47445.6843ms 200 text/plain; charset=utf-8
+2020-07-21 16:05:56.267 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:05:56.283 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:05:56.322 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:05:56.324 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:06:00.445 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:06:03.451 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:06:04.959 +05:30 [INF] Request finished in 8679.7546ms 401 
+2020-07-21 16:06:40.451 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 137
+2020-07-21 16:06:42.505 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:06:44.441 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:06:44.462 +05:30 [INF] Request finished in 4012.848ms 500 text/plain
+2020-07-21 16:06:44.486 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:06:45.992 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:06:47.374 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:06:47.375 +05:30 [INF] Request finished in 2889.5106ms 500 text/plain
+2020-07-21 16:06:47.512 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:06:48.467 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:06:49.696 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:06:49.700 +05:30 [INF] Request finished in 2186.3064ms 500 text/plain
+2020-07-21 16:06:49.708 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 138
+2020-07-21 16:06:50.604 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:06:52.057 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:06:52.059 +05:30 [INF] Request finished in 2351.5005ms 500 text/plain
+2020-07-21 16:07:18.418 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 137
+2020-07-21 16:07:21.583 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:07:51.500 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:07:51.504 +05:30 [INF] Request finished in 33084.1287ms 500 text/plain
+2020-07-21 16:07:51.514 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:08:22.594 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:08:22.610 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:08:22.613 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:08:22.610 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:08:35.193 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:08:35.210 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:08:35.228 +05:30 [INF] Request finished in 12624.7122ms 401 
+2020-07-21 16:08:44.067 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 137
+2020-07-21 16:08:46.281 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:08:49.816 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:08:49.836 +05:30 [INF] Request finished in 5770.5439ms 500 text/plain
+2020-07-21 16:08:49.856 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:08:51.754 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:08:52.889 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:08:52.893 +05:30 [INF] Request finished in 3035.205ms 500 text/plain
+2020-07-21 16:08:53.127 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:08:55.846 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:17:52.843 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:17:52.848 +05:30 [INF] Request finished in 539747.3987ms 500 text/plain
+2020-07-21 16:18:17.663 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 137
+2020-07-21 16:18:19.192 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:18:40.125 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:18:40.129 +05:30 [INF] Request finished in 22465.9228ms 500 text/plain
+2020-07-21 16:18:40.143 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:18:42.923 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:18:42.958 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:18:42.960 +05:30 [INF] Request finished in 2818.8156ms 500 text/plain
+2020-07-21 16:18:42.967 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:18:43.651 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:18:43.698 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:18:43.699 +05:30 [INF] Request finished in 732.3456ms 500 text/plain
+2020-07-21 16:18:43.711 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 138
+2020-07-21 16:18:44.296 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:18:44.314 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:18:44.315 +05:30 [INF] Request finished in 603.787ms 500 text/plain
+2020-07-21 16:18:51.708 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json 135
+2020-07-21 16:18:54.896 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:20:09.897 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:20:09.913 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:20:09.916 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:20:09.919 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:20:12.511 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:20:12.530 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:20:12.548 +05:30 [INF] Request finished in 2636.371ms 401 
+2020-07-21 16:20:19.280 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json 135
+2020-07-21 16:20:21.382 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:27:24.079 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:27:24.095 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:27:24.097 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:27:24.093 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:27:27.213 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:27:27.227 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:27:27.244 +05:30 [INF] Request finished in 3155.8334ms 401 
+2020-07-21 16:27:42.981 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 137
+2020-07-21 16:27:45.680 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:27:53.683 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:27:53.704 +05:30 [INF] Request finished in 10726.0141ms 500 text/plain
+2020-07-21 16:27:53.723 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:27:55.123 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:27:56.075 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:27:56.079 +05:30 [INF] Request finished in 2353.8188ms 500 text/plain
+2020-07-21 16:27:56.093 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:27:56.384 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:27:57.434 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:27:57.437 +05:30 [INF] Request finished in 1343.604ms 500 text/plain
+2020-07-21 16:27:57.673 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 138
+2020-07-21 16:27:58.413 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:27:59.235 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:27:59.237 +05:30 [INF] Request finished in 1564.5251ms 500 text/plain
+2020-07-21 16:28:04.015 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json 135
+2020-07-21 16:28:13.251 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:28:55.899 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:28:55.919 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:28:55.921 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:28:55.917 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:28:57.668 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:28:57.683 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:28:57.698 +05:30 [INF] Request finished in 1785.5647ms 401 
+2020-07-21 16:29:08.959 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 137
+2020-07-21 16:29:11.445 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:29:17.201 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:29:17.221 +05:30 [INF] Request finished in 8264.2518ms 500 text/plain
+2020-07-21 16:29:17.245 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:29:18.305 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:29:19.208 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:29:19.210 +05:30 [INF] Request finished in 1965.1614ms 500 text/plain
+2020-07-21 16:29:19.217 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 139
+2020-07-21 16:29:19.533 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:29:24.054 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:29:24.059 +05:30 [INF] Request finished in 4842.4002ms 500 text/plain
+2020-07-21 16:29:24.067 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails application/json; charset=utf-8 138
+2020-07-21 16:29:25.044 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:29:25.929 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at CustomerService.Models.AuthenticationMiddleware.Invoke(HttpContext context, IUsers user, ILogger`1 logger) in C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService\Models\AuthenticationMiddleware.cs:line 31
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-21 16:29:25.931 +05:30 [INF] Request finished in 1865.0808ms 500 text/plain
+2020-07-21 16:30:40.430 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:30:40.448 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:30:40.446 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:30:40.450 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:30:42.401 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:30:42.416 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:30:42.432 +05:30 [INF] Request finished in 1991.6126ms 401 
+2020-07-21 16:30:57.783 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails  0
+2020-07-21 16:31:00.944 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:31:11.424 +05:30 [WRN] No type was specified for the decimal column 'TotalSalesAmount' on entity type 'CustomerDetails'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2020-07-21 16:31:11.462 +05:30 [INF] Entity Framework Core 3.1.6 initialized 'CustomerServiceContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2020-07-21 16:31:11.953 +05:30 [INF] Executed DbCommand (48ms) [Parameters=[@__username_0='?' (Size = 4000), @__password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[ID], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Username] = @__username_0) AND ([u].[Password] = @__password_1)
+2020-07-21 16:31:30.990 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?' (Size = 4000), @__password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[ID], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Username] = @__username_0) AND ([u].[Password] = @__password_1)
+2020-07-21 16:31:49.634 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000), @__password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[ID], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Username] = @__username_0) AND ([u].[Password] = @__password_1)
+2020-07-21 16:31:53.860 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:31:56.026 +05:30 [INF] Request finished in 58245.3285ms 401 
+2020-07-21 16:32:20.766 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2020-07-21 16:32:20.785 +05:30 [INF] Hosting environment: Development
+2020-07-21 16:32:20.787 +05:30 [INF] Content root path: C:\Users\abhijeet.deshmukh\source\repos\CustomerService\CustomerService
+2020-07-21 16:32:20.784 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:59138/CustomerService  
+2020-07-21 16:32:23.983 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:32:23.999 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:32:24.017 +05:30 [INF] Request finished in 3238.2984ms 401 
+2020-07-21 16:32:38.173 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:59138/CustomerService/AddEditCustomerDetails  0
+2020-07-21 16:32:40.336 +05:30 [INF] Authentication Process Started!
+2020-07-21 16:32:49.972 +05:30 [WRN] No type was specified for the decimal column 'TotalSalesAmount' on entity type 'CustomerDetails'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2020-07-21 16:32:50.008 +05:30 [INF] Entity Framework Core 3.1.6 initialized 'CustomerServiceContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2020-07-21 16:32:50.508 +05:30 [INF] Executed DbCommand (47ms) [Parameters=[@__username_0='?' (Size = 4000), @__password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[ID], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Username] = @__username_0) AND ([u].[Password] = @__password_1)
+2020-07-21 16:32:51.911 +05:30 [ERR] Authentication Failed!
+2020-07-21 16:32:59.161 +05:30 [INF] Request finished in 20990.0703ms 401 
