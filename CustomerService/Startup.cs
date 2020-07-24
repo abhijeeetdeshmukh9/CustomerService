@@ -3,15 +3,13 @@ using CustomerService.Interfaces;
 using CustomerService.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Serilog;
-using System;
-using System.Configuration;
 
 namespace CustomerService
 {
@@ -48,7 +46,33 @@ namespace CustomerService
             });
             //var host = builder.Build();
 
-            
+            services.AddSwaggerGen(c => {
+
+                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic",
+                    In = ParameterLocation.Header,
+                    Description = "Basic Authorization header using the Bearer scheme."
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "basic"
+                                }
+                            },
+                            new string[] {}
+                    }
+                });
+
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -68,11 +92,17 @@ namespace CustomerService
 
             app.UseRouting();
 
-            //app.UseAuthentication();
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger();
 
-            //app.UseAuthorization();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
-            app.UseMiddleware<AuthenticationMiddleware>();
+
+
+            app.UseMiddleware<AuthenticationMiddleware>();            
 
             app.UseEndpoints(endpoints =>
             {

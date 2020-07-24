@@ -11,5 +11,6 @@ namespace CustomerService.Interfaces
         IEnumerable<CustomerDetails> GetAllCustomerDetails();
         CustomerDetails GetCustomerDetailsById(string Id);
         bool AddEditCustomerDetails(CustomerDetails customerDetails);
+        bool AddEditCustomerDetails(List<CustomerDetails> customerDetails);
     }
 }

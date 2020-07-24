@@ -11,6 +11,6 @@ namespace CustomerService.Interfaces
         IEnumerable<CustomerType> GetAllCustomerType();
         CustomerType GetCustomerTypeById(int Id);
         bool AddEditCustomerType(CustomerType customerType);
-        bool DeleteUser(int Id);
+        bool DeleteCustomerType(int Id);
     }
 }

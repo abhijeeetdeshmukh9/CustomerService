@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace CustomerService.DAL
 {
+    /// <summary>
+    /// This class is used for performing all the CRUD operations related to Customer Type
+    /// </summary>
     public class CustomerTypeDAL : ICustomerType
     {
         private readonly CustomerServiceContext _customerServiceContext;
@@ -14,6 +17,7 @@ namespace CustomerService.DAL
             _customerServiceContext = customerServiceContext;
         }
 
+        // Add or Update the CustomerType
         public bool AddEditCustomerType(CustomerType customerType)
         {
             try
@@ -43,7 +47,8 @@ namespace CustomerService.DAL
             }
         }
 
-        public bool DeleteUser(int Id)
+        // Delete customer Type
+        public bool DeleteCustomerType(int Id)
         {
             try
             {
@@ -59,6 +64,7 @@ namespace CustomerService.DAL
             }
         }
 
+        // Returns list of All Customer Types
         public IEnumerable<CustomerType> GetAllCustomerType()
         {
             try
@@ -71,6 +77,7 @@ namespace CustomerService.DAL
             }
         }
 
+        // Returns Customer Type by Customer Id
         public CustomerType GetCustomerTypeById(int Id)
         {
             try

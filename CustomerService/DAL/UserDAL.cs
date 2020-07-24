@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace CustomerService.DAL
 {
+    /// <summary>
+    /// This class is used for performing all the CRUD operations related to Customer Details
+    /// </summary>
     public class UserDAL : IUsers
     {
         private readonly CustomerServiceContext _customerServiceContext;        
@@ -15,6 +18,7 @@ namespace CustomerService.DAL
             _customerServiceContext = customerServiceContext;
         }
 
+        // Add or Update the Users used for authenticating
         public bool AddEditUser(Users user)
         {            
             try
@@ -44,6 +48,7 @@ namespace CustomerService.DAL
             }
         }
 
+        // Delets the Users from Users table
         public bool DeleteUser(int Id)
         {
             try
@@ -60,7 +65,7 @@ namespace CustomerService.DAL
             }
         }      
          
-
+        // Returns the User by Username and Password from Users table
         public Users GetUserByUsernamePassword(string username, string password)
         {
             try
@@ -73,6 +78,8 @@ namespace CustomerService.DAL
             }
         }
 
+       
+        // Returns List of All Users from Users table
         IEnumerable<Users> IUsers.GetAllUsers()
         {
             try

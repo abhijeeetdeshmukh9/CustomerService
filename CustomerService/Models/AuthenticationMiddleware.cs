@@ -30,11 +30,11 @@ namespace CustomerService.Models
                 string usernamePassword = encoding.GetString(Convert.FromBase64String(encodedUsernamePassword));
 
 
-                //string username = usernamePassword.Substring(0, usernamePassword.IndexOf(':'));
-                //string password = usernamePassword.Substring(usernamePassword.IndexOf(':') + 1);
+                string username = usernamePassword.Substring(0, usernamePassword.IndexOf(':'));
+                string password = usernamePassword.Substring(usernamePassword.IndexOf(':') + 1);
 
-                string username = "abhijeet";
-                string password = "Secure*12";
+                //string username = "abhijeet";
+                //string password = "Secure*12";
 
                 if (user.GetUserByUsernamePassword(username, password) != null)
                 {
@@ -49,8 +49,7 @@ namespace CustomerService.Models
                 }
             }
             else
-            {
-                logger.LogError("Authentication Failed!");
+            {                
                 // no authorization header
                 context.Response.StatusCode = 401; //Unauthorized
                 return;

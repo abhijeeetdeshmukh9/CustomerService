@@ -1,15 +1,14 @@
-﻿using CustomerService.Models;
-using System;
+﻿using System;
 
-namespace CustomerService
+namespace CustomerServiceClient
 {
     public class Helper
     {
-        static string specialChar = @"#:;";
-        public static bool hasSpecialChar(string input)
+        static string specialChars = @"#:;";
+        public static bool HasSpecialChar(string input)
         {
             
-            foreach (var item in specialChar)
+            foreach (var item in specialChars)
             {
                 if (input.Contains(item)) return true;
             }
@@ -18,10 +17,10 @@ namespace CustomerService
         }
         public static string LogDetails(CustomerDetails customer, string message)
         {
-            return LogDetails(customer.UniqueId, customer.CustomerName, customer.CustomerType.ToString(), customer.Filename, customer.TimeStamp.ToString(),customer.TotalSalesAmount.ToString(), message);
+            return LogDetails(customer.UniqueId, customer.CustomerName, customer.CustomerType.ToString(), customer.Filename, customer.TimeStamp.ToString(), customer.TotalSalesAmount.ToString(), message);
         }
 
-        public static string LogDetails(string UniqueId, string CustomerName, string CustomerType, string Filename, string TimeStamp, string TotalSalesAmount,string message)
+        public static string LogDetails(string UniqueId, string CustomerName, string CustomerType, string Filename, string TimeStamp, string TotalSalesAmount, string message)
         {
             return String.Format("{0} {1} {2} {3} {4} {5}",
                 (string.IsNullOrEmpty(UniqueId) ? "" : "UniqueId : " + UniqueId),

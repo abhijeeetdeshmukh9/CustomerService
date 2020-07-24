@@ -1,8 +1,9 @@
-﻿using CustomerService;
-using CustomerService.Models;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,7 +14,17 @@ namespace CustomerServiceClient
 {
     public partial class Form1 : Form
     {
+        #region Private variables
+
         private readonly ILogger _logger;
+        private string username = ConfigurationManager.AppSettings["Username"];
+        private string password = ConfigurationManager.AppSettings["Password"];
+        private string apiurl = ConfigurationManager.AppSettings["ApiUrl"];
+        private string DATETIME_ERROR_MESSAGE = "Date is not valid. Please correct it for UniqueId";
+        private string MINSALES_ERROR_MESSAGE = "Minimun Sales amount value is greater than total sales amount for UniqueId";
+        private string DATECOMPARE_ERROR_MESSAGE = "Timestamp value is greater or equal to Current Date for UniqueId";
+
+        #endregion
 
         public Form1(ILogger<Form1> logger)
         {
@@ -21,100 +32,132 @@ namespace CustomerServiceClient
             InitializeComponent();
         }
 
+        // Button Click Event of the Form
         private async void button1_Click(object sender, EventArgs e)
         {
-            _logger.LogInformation("Set the details");
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            //dlg.ShowDialog();
-
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(txtMinSalesAmt.Text) || string.IsNullOrEmpty(txtMinSalesAmt.Text))
             {
-                string line;
-                string fileName;
-                fileName = dlg.FileName;
-                try
+                MessageBox.Show("Please type Minimum Sales Amount and Filename!");
+            }
+            else
+            {
+
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    _logger.LogInformation($"Database Insertion process started for file {fileName}");
-                    //MessageBox.Show(fileName);
-                    using (StreamReader file = new StreamReader(fileName))
+                    string line;
+                    string fileName;
+                    fileName = dlg.FileName;
+                    try
                     {
-                        while ((line = file.ReadLine()) != null)
+                        using (StreamReader file = new StreamReader(fileName))
                         {
-                            decimal minimumSalesValue = 0;
-                            string[] fields = line.Split(',');
-                            string day = string.Empty;
-                            string month = string.Empty;
-                            string year = string.Empty;
-
-                            string[] dateFields = fields[4].Split('-');
-
-                            day = dateFields[2].Replace("[", "").Replace("]", "");
-                            month = dateFields[1].Replace("(", "").Replace(")", "");
-                            year = dateFields[0].Replace("[", "").Replace("]", "");
-
-                            if (year.Length > 4)
-                                year = year.Substring(0, 4);
-
-                            var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-                            var timestamp = year + "-" + month + "-" + day;
-
-                            if (string.IsNullOrEmpty(fields[0]) == false && Helper.hasSpecialChar(fields[0]) == false)
+                            if (new FileInfo(fileName).Length != 0)
                             {
-
-                                minimumSalesValue = string.IsNullOrEmpty(textBox1.Text) ? minimumSalesValue : Convert.ToDecimal(textBox1.Text.Trim());
-
-                                if (Convert.ToDecimal(fields[3]) <= minimumSalesValue)
+                                HttpClient client = null;
+                                _logger.LogInformation($"Database Insertion process started for file {fileName}");
+                                try
                                 {
-                                    _logger.LogError($"Minimun Sales amount value is greater than total sales amount for UniqueId {fields[0]}");
-                                    continue;
+
+                                    var lstCustomerDetails = new List<CustomerDetails>();
+
+                                    while ((line = file.ReadLine()) != null)
+                                    {
+                                        decimal minimumSalesValue = 0;
+                                        string[] fields = line.Split(',');
+                                        string day = string.Empty;
+                                        string month = string.Empty;
+                                        string year = string.Empty;
+
+                                        string[] dateFields = fields[4].Split('-');
+
+                                        day = dateFields[2].Replace("[", "").Replace("]", "");
+                                        month = dateFields[1].Replace("(", "").Replace(")", "");
+                                        year = dateFields[0].Replace("[", "").Replace("]", "");
+                                                                                
+                                        var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                                        DateTime timestamp;
+                                        if (DateTime.TryParseExact((year + "-" + month + "-" + day), "yyyy-MM-dd", null, DateTimeStyles.None, out timestamp) == false)
+                                        {
+                                            _logger.LogError($"{DATETIME_ERROR_MESSAGE} - {fields[0]}");
+                                            continue;
+                                        }
+
+                                        minimumSalesValue = (string.IsNullOrEmpty(txtMinSalesAmt.Text)) ? minimumSalesValue : Convert.ToDecimal(txtMinSalesAmt.Text.Trim());
+
+                                        if (Convert.ToDecimal(fields[3]) <= minimumSalesValue)
+                                        {
+                                            _logger.LogError($"{MINSALES_ERROR_MESSAGE} - {fields[0]}");
+                                            continue;
+                                        }
+
+                                        if (currentDate == timestamp.ToString("yyyy-MM-dd"))
+                                        {
+                                            _logger.LogError($"{DATECOMPARE_ERROR_MESSAGE} - {fields[0]}!");
+                                            continue;
+                                        }
+
+                                        var customer = new CustomerDetails()
+                                        {
+                                            UniqueId = fields[0],
+                                            CustomerName = fields[2],
+                                            CustomerType = Convert.ToInt32(fields[1]),
+                                            Filename = txtFilename.Text.Trim(),
+                                            TimeStamp = Convert.ToDateTime(timestamp),
+                                            TotalSalesAmount = Convert.ToDecimal(fields[3])
+                                        };
+
+                                        lstCustomerDetails.Add(customer);
+
+                                    }
+
+                                    string encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes($"{username}:{password}"));
+
+                                    client = new HttpClient();                                    
+                                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encoded);
+                                    var content = new StringContent(JsonConvert.SerializeObject(lstCustomerDetails), Encoding.UTF8, "application/json");
+                                    var result = await client.PostAsync(apiurl, content);
+
+                                    client.Dispose();
+
+                                    MessageBox.Show("File Processed Succesfully!");
                                 }
-
-                                if (currentDate == timestamp)
+                                catch (Exception ex)
                                 {
-                                    _logger.LogError($"Timestamp value is greater or equal to Current Date for UniqueId {fields[0]}!");
-                                    continue;
+                                    client.Dispose();
+                                    _logger.LogError($"Error Occured while processing the file{fileName}. " + ex.Message);
                                 }
-
-                                string apiUrl = "http://localhost:59138/CustomerService/AddEditCustomerDetails";
-
-                                var customer = new CustomerDetails()
-                                {
-                                    UniqueId = fields[0],
-                                    CustomerName = fields[2],
-                                    CustomerType = Convert.ToInt32(fields[1]),
-                                    Filename = string.IsNullOrEmpty(textBox2.Text) ? fileName : textBox1.Text.Trim(),
-                                    TimeStamp = Convert.ToDateTime(timestamp),
-                                    TotalSalesAmount = minimumSalesValue
-                                };
-
-                                
-                                _logger.LogInformation(Helper.LogDetails(customer,"Received data for insertion!"));
-                                //string username = Convert.ToBase64String(Encoding.UTF8.GetBytes("abhijeet"));
-                                //string password = Convert.ToBase64String(Encoding.UTF8.GetBytes("Secure*12"));
-
-                                string username = "abhijeet";
-                                string password = "Secure*12";
-
-                                HttpClient client = new HttpClient();
-                                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", username + ":" + password);
-                                var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
-                                var result = await client.PostAsync(apiUrl, content);
-
-                                //var response = result;
-                                //var json = client.UploadString(apiUrl + "/AddEditCustomerDetails", inputJson);
                             }
                             else
                             {
-                                _logger.LogError($"UniqueId {fields[0]} value is not Correct. Please Remove special character if it has any!");
+                                MessageBox.Show("File is empty");
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {                        
+                        _logger.LogError($"Error Occured while processing the file{fileName}. " + ex.Message);
+                        MessageBox.Show("Error Occured while processing the file");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error Occured while processing the file{fileName}. " + ex.Message);
-                }
+            }
+        }
+
+        // Allow only Numerical value with decimal point
+        private void txtMinSalesAmt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
     }

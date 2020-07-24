@@ -28,26 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtMinSalesAmt = new System.Windows.Forms.TextBox();
+            this.txtFilename = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtMinSalesAmt
             // 
-            this.textBox1.Location = new System.Drawing.Point(321, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(195, 23);
-            this.textBox1.TabIndex = 0;
+            this.txtMinSalesAmt.Location = new System.Drawing.Point(321, 37);
+            this.txtMinSalesAmt.Name = "txtMinSalesAmt";
+            this.txtMinSalesAmt.Size = new System.Drawing.Size(195, 23);
+            this.txtMinSalesAmt.TabIndex = 0;
+            this.txtMinSalesAmt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMinSalesAmt_KeyPress);
             // 
-            // textBox2
+            // txtFilename
             // 
-            this.textBox2.Location = new System.Drawing.Point(321, 93);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(195, 23);
-            this.textBox2.TabIndex = 1;
+            this.txtFilename.Location = new System.Drawing.Point(321, 93);
+            this.txtFilename.Name = "txtFilename";
+            this.txtFilename.Size = new System.Drawing.Size(195, 23);
+            this.txtFilename.TabIndex = 1;
             // 
             // label1
             // 
@@ -73,7 +74,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "Browse";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -85,10 +86,10 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtFilename);
+            this.Controls.Add(this.txtMinSalesAmt);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Customer Service";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,8 +97,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtMinSalesAmt;
+        private System.Windows.Forms.TextBox txtFilename;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
