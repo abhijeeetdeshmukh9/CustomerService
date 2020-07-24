@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace CustomerServiceClient
 {
@@ -7,7 +8,7 @@ namespace CustomerServiceClient
         static string specialChars = @"#:;";
         public static bool HasSpecialChar(string input)
         {
-            
+
             foreach (var item in specialChars)
             {
                 if (input.Contains(item)) return true;
@@ -31,5 +32,27 @@ namespace CustomerServiceClient
                 message
                 );
         }
+
+        public static Status ValidateDate(string date, out DateTime timestamp)
+        {
+            if (DateTime.TryParseExact(date, "yyyy-MM-dd", null, DateTimeStyles.None, out timestamp) == false)
+            {
+                return Status.InvalidDate;
+            }
+            if(DateTime.Now.Date == timestamp.Date)
+            {
+                return Status.DateEqual;
+            }
+
+            return Status.ValidDate;
+        }
+
+        public enum Status
+        {
+            InvalidDate = 0,
+            DateEqual = 1,
+            ValidDate = 2
+        };
+
     }
 }

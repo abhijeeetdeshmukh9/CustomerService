@@ -1,12 +1,13 @@
 ﻿using CustomerService.Models;
 using System;
+using System.Globalization;
 
 namespace CustomerService
 {
     public class Helper
     {
         static string specialChar = @"#:;";
-        public static bool hasSpecialChar(string input)
+        public static bool HasSpecialChar(string input)
         {
             
             foreach (var item in specialChar)
@@ -31,6 +32,24 @@ namespace CustomerService
                 (string.IsNullOrEmpty(TotalSalesAmount) ? "" : "AgentId :" + TotalSalesAmount),
                 message
                 );
+        }
+
+        public static bool ValidateDate(string date, DateTime timestamp)
+        {
+            if (DateTime.TryParseExact(date, "yyyy-MM-dd", null, DateTimeStyles.None, out timestamp) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool DateCompare(DateTime currentDate, DateTime timestamp)
+        {            
+            if (timestamp.Date == currentDate.Date)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

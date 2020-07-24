@@ -57,6 +57,7 @@ namespace CustomerService.DAL
             }
         }
 
+        // Add Customer Details in Bulk
         public bool AddEditCustomerDetails(List<CustomerDetails> lstCustomerDetails)
         {
             try

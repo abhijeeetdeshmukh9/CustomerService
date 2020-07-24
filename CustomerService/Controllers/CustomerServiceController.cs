@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using Moq;
 
 namespace CustomerService.Controllers
 {
@@ -27,6 +28,7 @@ namespace CustomerService.Controllers
             _logger = logger;
         }
 
+        // Returns All Customers from CustomerDetails table 
         [HttpGet]
         [Route("GetAllCustomerDetails")]
         public IActionResult GetAllCustomerDetails()
@@ -34,6 +36,7 @@ namespace CustomerService.Controllers
             try
             {
                 _logger.LogInformation("Request for GetAllCustomerDetails Resource");
+
                 var customersDetails = _customerDetails.GetAllCustomerDetails();
 
                 if (customersDetails.Count() == 0)
@@ -51,6 +54,7 @@ namespace CustomerService.Controllers
             }
         }
 
+        // Returns Customer for particular Id from CustomerDetails table
         [HttpGet]
         [Route("GetCustomerDetailsById/{id}")]
         public IActionResult GetCustomerDetailsById(string id)
@@ -58,6 +62,7 @@ namespace CustomerService.Controllers
             try
             {
                 _logger.LogInformation($"Request for GetCustomerDetailsById Resource for Id : {id}");
+
                 var customersDetails = _customerDetails.GetCustomerDetailsById(id);
 
                 if (customersDetails == null)
@@ -75,36 +80,56 @@ namespace CustomerService.Controllers
             }
         }
 
+        //Action Method to add list of Customer Details in CustomerDetails table
         [HttpPost]
         [Route("AddEditCustomerDetails")]
         public IActionResult AddEditCustomerDetails(List<CustomerDetails> lstCustomerDetails)
         {
             var lstCustomerRecords = new List<CustomerDetails>();
+
             try
             {
                 _logger.LogInformation($"Request for AddEditCustomerDetails Resource");
+
                 if (lstCustomerDetails.Count == 0)
                 {
                     return BadRequest("No Data received!");
                 }
+
                 foreach (var customerDetails in lstCustomerDetails.OrderBy(x => x.CustomerName).ThenBy(x => x.UniqueId))
                 {
                     if (string.IsNullOrEmpty(customerDetails.UniqueId) == true
-                       || Helper.hasSpecialChar(customerDetails.UniqueId))
+                       && Helper.HasSpecialChar(customerDetails.UniqueId) == true)
                     {
                         _logger.LogError(Helper.LogDetails(customerDetails, "Unique Id value is not correct"));
                         continue;
                     }
 
-                    if (string.IsNullOrEmpty(Convert.ToString(customerDetails.TimeStamp)) == false)
+                    //if (string.IsNullOrEmpty(Convert.ToString(customerDetails.TimeStamp)) == false)
+                    //{
+                    //    var timestamp = Convert.ToDateTime(customerDetails.TimeStamp).ToString("yyyy-MM-dd");
+                    //    var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    //    if (timestamp == currentDate)
+                    //    {
+                    //        _logger.LogError(Helper.LogDetails(customerDetails, "Timestamp should be less than Current date!"));
+                    //        continue;
+                    //    }
+                    //}
+                    if (!string.IsNullOrEmpty(Convert.ToString(customerDetails.TimeStamp)))
                     {
-                        var timestamp = Convert.ToDateTime(customerDetails.TimeStamp).ToString("yyyy-MM-dd");
-                        var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-                        if (timestamp == currentDate)
+                        var isDateEqual = Helper.DateCompare(DateTime.Now, customerDetails.TimeStamp);
+
+                        if (isDateEqual)
                         {
                             _logger.LogError(Helper.LogDetails(customerDetails, "Timestamp should be less than Current date!"));
                             continue;
                         }
+                    }
+                    else
+                    {
+                        _logger.LogError(Helper.LogDetails(customerDetails, "Timestamp value is empty!"));
+                        continue;
                     }
 
                     lstCustomerRecords.Add(customerDetails);                    
@@ -121,7 +146,7 @@ namespace CustomerService.Controllers
                 {                    
 
                     _logger.LogInformation(JsonConvert.SerializeObject(lstCustomerRecords));
-                    return Ok(lstCustomerRecords);
+                    return Ok(JsonConvert.SerializeObject(lstCustomerRecords));
                 }                                
             }
             catch (Exception ex)
